@@ -17,19 +17,16 @@ func (h *Handler) RegisterRoutes(v *echo.Group) {
 	// adding white list
 	middleware.AddToWhiteList("/api/users/login", "POST")
 	middleware.AddToWhiteList("/api/users", "POST")
+	middleware.AddToWhiteList("/api/experiment", "POST")
 
 	userGroup := v.Group("/users")
 	userGroup.POST("", h.SignUp)
 	userGroup.POST("/login", h.Login)
 
-	urlGroup := v.Group("/urls")
-	urlGroup.GET("", h.FetchURLs)
-	urlGroup.POST("", h.CreateURL)
-	urlGroup.GET("/:urlID", h.GetURLStats)
-	urlGroup.DELETE("/:urlID", h.DeleteURL)
+	//moduleGroup := v.Group("/module")
+	//moduleGroup.GET("", h.CreateModule)
 
-	alertGroup := v.Group("/alerts")
-	alertGroup.GET("", h.FetchAlerts)
-	alertGroup.PUT("/:urlID", h.DismissAlert)
+	experimentGroup := v.Group("/experiment")
+	experimentGroup.POST("", h.RunExperiment)
 
 }

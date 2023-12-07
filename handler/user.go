@@ -10,10 +10,10 @@ import (
 // Login handler function, if login is successful a response with JWT and username is returned followed by a 200 status code
 // json request format:
 //
-//{
-//	"username": "foo" [alpha numeric, len > 3],
-//	"password": "bar1" [len > 3]
-//}
+//	{
+//		"username": "foo" [alpha numeric, len > 3],
+//		"password": "bar1" [len > 3]
+//	}
 func (h *Handler) Login(c echo.Context) error {
 	req := &userAuthRequest{}
 	user := &model.User{}
@@ -31,10 +31,10 @@ func (h *Handler) Login(c echo.Context) error {
 // SignUp user handler to handle sign up request, if successful it returns JWT with username followed by 201 status code
 // json request format:
 //
-//{
-//	"username": "foo" [alpha numeric, len > 3],
-//	"password": "bar1" [len > 3]
-//}
+//	{
+//		"username": "foo" [alpha numeric, len > 3],
+//		"password": "bar1" [len > 3]
+//	}
 func (h *Handler) SignUp(c echo.Context) error {
 	req := &userAuthRequest{}
 	user := &model.User{}
@@ -48,14 +48,4 @@ func (h *Handler) SignUp(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusCreated, NewResponseData(NewUserResponse(user)))
-}
-
-// FetchAlerts retrieves all alerts for the user, returns a list of urls with alert
-func (h *Handler) FetchAlerts(c echo.Context) error {
-	userID := extractID(c)
-	alerts, err := h.st.FetchAlerts(userID)
-	if err != nil {
-		return common.NewRequestError("coult not get alerts from database", err, http.StatusBadRequest)
-	}
-	return c.JSON(http.StatusOK, NewResponseData(alerts))
 }

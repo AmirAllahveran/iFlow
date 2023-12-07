@@ -3,13 +3,6 @@ FROM golang:latest AS builder
 ENV GO111MODULE=on \
     CGO_ENABLED=1
 
-#Maintainer info
-LABEL maintainer="Mohammad Fatemi <mr.smf8@gmail.com>"
-
-#change it with your proxy server
-#ARG http_proxy=68.183.214.82:443
-#ARG https_proxy=68.183.214.82:443
-
 
 WORKDIR /build
 

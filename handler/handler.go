@@ -4,7 +4,7 @@ import (
 	"github.com/asaskevich/govalidator"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo/v4"
-	"github.com/smf8/http-monitor/monitor"
+	"github.com/smf8/http-monitor/docker"
 	"github.com/smf8/http-monitor/store"
 )
 
@@ -15,12 +15,12 @@ func init() {
 
 type Handler struct {
 	st  *store.Store
-	sch *monitor.Scheduler
+	dck *docker.Client
 }
 
 // NewHandler creates a new handler with given store instance
-func NewHandler(st *store.Store, sch *monitor.Scheduler) *Handler {
-	return &Handler{st: st, sch: sch}
+func NewHandler(st *store.Store, dck *docker.Client) *Handler {
+	return &Handler{st: st, dck: dck}
 }
 
 func extractID(c echo.Context) uint {

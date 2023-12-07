@@ -8,9 +8,11 @@ import (
 
 type User struct {
 	gorm.Model
-	Username string `gorm:"unique_index;not null"`
-	Password string `gorm:"not null"`
-	Urls     []URL  `gorm:"foreignkey:user_id"`
+	Username    string       `gorm:"unique_index;not null"`
+	Password    string       `gorm:"not null"`
+	Packages    []Package    `gorm:"foreignKey:UserID"`
+	Modules     []Module     `gorm:"foreignKey:UserID"`
+	Experiments []Experiment `gorm:"foreignKey:UserID"`
 }
 
 // NewUser creates a user with username and Hashed password
